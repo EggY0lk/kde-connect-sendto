@@ -26,24 +26,7 @@ Add a **right-click → Send to → "Send to Your Phone"** entry to Windows Expl
 
 ## Changing the variables
 
-Edit `send-kdeconnect.ps1` — the only file you need to touch:
-
-```powershell
-param([string[]]$FilePaths)
-
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
-
-$device = 'YOUR_PHONE_NAME_HERE'          # <-- your phone's KDE Connect name (must match exactly)
-$kdeconnectCli = "$env:LOCALAPPDATA\Microsoft\WindowsApps\kdeconnect-cli.exe"
-$iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
-```
-
-| Variable | What to change |
-|----------|----------------|
-| `$device` | Your phone's name as shown in the KDE Connect app (e.g. `'My Phone'`). Must match exactly, including spaces/case. |
-| `$kdeconnectCli` | Path to `kdeconnect-cli.exe` if it's not in `WindowsApps` (e.g. a portable install). |
-| `$iconPath` | Where `setup-kdeconnect-sendto.ps1` puts the icon — only needed if you move the `.ico`. |
+No variables to change — the script auto-detects your phone's KDE Connect name using `kdeconnect-cli.exe --list-available --name-only`. Just make sure your phone is paired and connected before sending.
 
 To rename the shortcut / menu entry, edit `setup-kdeconnect-sendto.ps1` and change `'Send to Your Phone.lnk'` (both the `$lnkPath` line and the cleanup line), then re-run setup.
 

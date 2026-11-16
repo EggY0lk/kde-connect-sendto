@@ -3,9 +3,18 @@ param([string[]]$FilePaths)
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-$device = 'YOUR_PHONE_NAME_HERE'  # <-- your phone's KDE Connect name
 $kdeconnectCli = "$env:LOCALAPPDATA\Microsoft\WindowsApps\kdeconnect-cli.exe"
 $iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
+
+# Auto-detect connected device name
+$device = & $kdeconnectCli --list-available --name-only 2>$null
+if (-not $device) {
+    $msg = "No KDE Connect device found. Make sure your phone is paired and connected."
+    [System.Windows.Forms.MessageBox]::Show($msg, "KDE Connect – Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+    exit 1
+}
+# If multiple devices, use the first one
+if ($device -is [array]) { $device = $device[0] }
 
 $files = ($FilePaths | Where-Object { $_ -ne $null -and $_ -ne '' })
 
