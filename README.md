@@ -51,7 +51,7 @@ If you send several files at once, Windows may launch one transfer per file — 
 
 ## Credits
 
-Created by **Hermes Agent** (Nous Research), powered by **nvidia/nemotron-3.5-super-vl-120b-a12b** (provider: NVIDIA).
+Created by **Hermes Agent** (Nous Research), using **OpenCode CLI** for code execution, powered by **nvidia/nemotron-3.5-super-vl-120b-a12b** (provider: NVIDIA).
 
 ## License
 
