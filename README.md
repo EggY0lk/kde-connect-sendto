@@ -36,7 +36,7 @@ If you send several files at once, Windows may launch one transfer per file — 
 
 **Original app:** KDE Connect is developed by the KDE community. Source: https://invent.kde.org/network/kdeconnect-kde/
 
-**This fork:** Send To shortcut integration for Windows 11 implemented with **Hermes Agent** (Nous Research), using **OpenCode CLI**, powered by **nvidia/nemotron-3.5-super-vl-120b-a12b** (provider: NVIDIA).
+**This fork:** Send To shortcut integration for Windows 11 implemented directly with Hermes Agent (Nous Research), powered by **nvidia/nemotron-3.5-super-vl-120b-a12b** (provider: NVIDIA).
 
 ## License
 
