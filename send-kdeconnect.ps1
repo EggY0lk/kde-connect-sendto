@@ -3,23 +3,26 @@ param([string[]]$FilePaths)
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-$kdeconnectCli = "$env:LOCALAPPDATA\Microsoft\WindowsApps\kdeconnect-cli.exe"
+$kdeconnectCli = "C:\Users\AlexNg\AppData\Local\Microsoft\WindowsApps\kdeconnect-cli.exe"
 $iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
 
-# Auto-detect connected device name
-$device = & $kdeconnectCli --list-available --name-only 2>$null
-if (-not $device) {
+# Auto-detect connected device name (paired and reachable only)
+$deviceInfo = & $kdeconnectCli --list-available --id-name-only 2>&1
+if (-not $deviceInfo) {
     $msg = "No KDE Connect device found. Make sure your phone is paired and connected."
-    [System.Windows.Forms.MessageBox]::Show($msg, "KDE Connect – Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+    [System.Windows.Forms.MessageBox]::Show($msg, "KDE Connect - Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
     exit 1
 }
-# If multiple devices, use the first one
-if ($device -is [array]) { $device = $device[0] }
+# Parse "id name" format, take first line
+$deviceLine = if ($deviceInfo -is [array]) { $deviceInfo[0] } else { $deviceInfo }
+$parts = $deviceLine -split ' ', 2
+$deviceId = $parts[0]
+$device = $parts[1]
 
 $files = ($FilePaths | Where-Object { $_ -ne $null -and $_ -ne '' })
 
 $form = New-Object System.Windows.Forms.Form
-$form.Text = 'KDE Connect – Sending'
+$form.Text = 'KDE Connect - Sending'
 $form.Size = New-Object System.Drawing.Size(420, 150)
 $form.StartPosition = 'CenterScreen'
 $form.FormBorderStyle = 'FixedDialog'
