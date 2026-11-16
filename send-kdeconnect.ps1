@@ -3,7 +3,7 @@ param([string[]]$FilePaths)
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-$device = 'Galaxy A25 5G'
+$device = 'YOUR_PHONE_NAME_HERE'  # <-- your phone's KDE Connect name
 $kdeconnectCli = "$env:LOCALAPPDATA\Microsoft\WindowsApps\kdeconnect-cli.exe"
 $iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
 

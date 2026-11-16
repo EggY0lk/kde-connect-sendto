@@ -21,9 +21,10 @@ if (Test-Path $appExe) {
 
 $ws = New-Object -ComObject WScript.Shell
 $sendTo = [Environment]::GetFolderPath('SendTo')
-$lnkPath = Join-Path $sendTo 'Send to Galaxy A25 5G.lnk'
+$lnkPath = Join-Path $sendTo 'Send to Your Phone.lnk'
 
 if (Test-Path $lnkPath) { Remove-Item $lnkPath -Force }
+if (Test-Path (Join-Path $sendTo 'Send to Galaxy A25 5G.lnk')) { Remove-Item (Join-Path $sendTo 'Send to Galaxy A25 5G.lnk') -Force }
 if (Test-Path (Join-Path $sendTo 'Send to My Phone.lnk')) { Remove-Item (Join-Path $sendTo 'Send to My Phone.lnk') -Force }
 
 $lnk = $ws.CreateShortcut($lnkPath)
@@ -31,7 +32,7 @@ $lnk.TargetPath = 'powershell.exe'
 $lnk.Arguments = '-WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\AlexNg\AppData\Roaming\KDE Connect\send-kdeconnect.ps1"'
 $lnk.WorkingDirectory = '%USERPROFILE%'
 $lnk.WindowStyle = 7
-$lnk.Description = 'Send selected file(s) to Galaxy A25 5G via KDE Connect (progress popup, no console window)'
+$lnk.Description = 'Send selected file(s) to your phone via KDE Connect (progress popup, no console window)'
 $lnk.IconLocation = $icoPath
 $lnk.Save()
 
