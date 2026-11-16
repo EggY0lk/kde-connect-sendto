@@ -9,7 +9,7 @@ $iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
 # Auto-detect connected device name (paired and reachable only)
 $deviceInfo = & $kdeconnectCli --list-available --id-name-only 2>&1
 $cliExitCode = $LASTEXITCODE
-if ($cliExitCode -ne 0 -or -not $deviceInfo -or $deviceInfo -match 'error|Error|not found|Couldn') {
+if ($cliExitCode -ne 0 -or -not $deviceInfo -or $deviceInfo -match 'error|Error|not found|Couldn|devices found') {
     $msg = "No KDE Connect device found. Make sure your phone is paired and connected."
     [System.Windows.Forms.MessageBox]::Show($msg, "KDE Connect - Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
     exit 1
