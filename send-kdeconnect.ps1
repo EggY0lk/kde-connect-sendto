@@ -3,7 +3,7 @@ param([string[]]$FilePaths)
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-$kdeconnectCli = "C:\Users\AlexNg\AppData\Local\Microsoft\WindowsApps\kdeconnect-cli.exe"
+$kdeconnectCli = "$env:LOCALAPPDATA\Microsoft\WindowsApps\kdeconnect-cli.exe"
 $iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
 
 # Auto-detect connected device name (paired and reachable only)

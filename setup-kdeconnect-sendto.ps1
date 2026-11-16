@@ -3,7 +3,11 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName System.Windows.Forms
 
-$appExe  = "C:\Program Files\WindowsApps\KDEe.V.KDEConnect_26.802.6845.0_x64__7vt06qxq7ptv8\bin\kdeconnect-app.exe"
+# Find kdeconnect-app.exe in WindowsApps (version-specific folder)
+$appExe = Get-ChildItem -Path "$env:ProgramFiles\WindowsApps" -Filter "kdeconnect-app.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+if (-not $appExe) {
+    $appExe = "C:\Program Files\WindowsApps\KDEe.V.KDEConnect_26.802.6845.0_x64__7vt06qxq7ptv8\bin\kdeconnect-app.exe"
+}
 $icoDir  = "$env:APPDATA\KDE Connect"
 $icoPath = Join-Path $icoDir 'kdeconnect.ico'
 if (-not (Test-Path $icoDir)) { New-Item -ItemType Directory -Path $icoDir | Out-Null }
@@ -28,7 +32,7 @@ if (Test-Path (Join-Path $sendTo 'Send to My Phone.lnk')) { Remove-Item (Join-Pa
 
 $lnk = $ws.CreateShortcut($lnkPath)
 $lnk.TargetPath = 'powershell.exe'
-$lnk.Arguments = '-WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\AlexNg\AppData\Roaming\KDE Connect\send-kdeconnect.ps1"'
+$lnk.Arguments = '-WindowStyle Hidden -ExecutionPolicy Bypass -File "$env:APPDATA\KDE Connect\send-kdeconnect.ps1"'
 $lnk.WorkingDirectory = '%USERPROFILE%'
 $lnk.WindowStyle = 7
 $lnk.Description = 'Send selected file(s) to your phone via KDE Connect (progress popup, no console window)'
