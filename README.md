@@ -41,7 +41,7 @@ $iconPath  = "$env:APPDATA\KDE Connect\kdeconnect.ico"
 
 | Variable | What to change |
 |----------|----------------|
-| `$device` | Your phone's name as shown in the KDE Connect app (e.g. `'My Phone'`, `'Samsung Galaxy'`). Must match exactly, including spaces/case. |
+| `$device` | Your phone's name as shown in the KDE Connect app (e.g. `'My Phone'`). Must match exactly, including spaces/case. |
 | `$kdeconnectCli` | Path to `kdeconnect-cli.exe` if it's not in `WindowsApps` (e.g. a portable install). |
 | `$iconPath` | Where `setup-kdeconnect-sendto.ps1` puts the icon — only needed if you move the `.ico`. |
 

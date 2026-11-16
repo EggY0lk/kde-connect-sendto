@@ -24,7 +24,6 @@ $sendTo = [Environment]::GetFolderPath('SendTo')
 $lnkPath = Join-Path $sendTo 'Send to Your Phone.lnk'
 
 if (Test-Path $lnkPath) { Remove-Item $lnkPath -Force }
-if (Test-Path (Join-Path $sendTo 'Send to Galaxy A25 5G.lnk')) { Remove-Item (Join-Path $sendTo 'Send to Galaxy A25 5G.lnk') -Force }
 if (Test-Path (Join-Path $sendTo 'Send to My Phone.lnk')) { Remove-Item (Join-Path $sendTo 'Send to My Phone.lnk') -Force }
 
 $lnk = $ws.CreateShortcut($lnkPath)
